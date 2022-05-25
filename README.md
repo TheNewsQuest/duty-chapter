@@ -1,30 +1,12 @@
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
+  <img src="https://i.ibb.co/7V7ycrs/image.png" width="500" height="250" alt="Warrior Logo" />
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+# Duty Chapter - The duty calls!
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+In this chapter, there's a duty that require us to use all the collected things to serve the "fanciness" of the Fancy Chapter and initialize an interaction between the chapters.
 
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+# Getting Started
 
 ## Installation
 
@@ -58,16 +40,38 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## Support
+## Contribution Guide
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+All the commit messages must be following the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) guide for semantic purposes! Otherwise your commits will be rejected automatically by commit hook!
 
-## Stay in touch
+#### <a name="commit-header"></a>Commit Message Header
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+```
+<type>(<scope>): <short summary>
+  │       │             │
+  │       │             └─⫸ Summary in present tense. Not capitalized. No period at the end.
+  │       │
+  │       └─⫸ Commit Scope: Feature scopes
+  │
+  └─⫸ Commit Type: build|ci|docs|feat|fix|perf|refactor|test|chore
+```
 
-## License
+The `<type>` and `<summary>` fields are mandatory, the `(<scope>)` field is optional.
 
-Nest is [MIT licensed](LICENSE).
+##### Type
+
+Must be one of the following:
+
+- **build**: Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)
+- **ci**: Changes to our CI configuration files and scripts (example scopes: Circle, BrowserStack, SauceLabs)
+- **docs**: Documentation only changes
+- **feat**: A new feature
+- **fix**: A bug fix
+- **perf**: A code change that improves performance
+- **refactor**: A code change that neither fixes a bug nor adds a feature
+- **test**: Adding missing tests or correcting existing tests
+- **chore**: Adding commit that is not related to code (resolve conflicts, etc...)
+
+##### Scope (Optional)
+
+The scope should be the name of the feature's scope that you're developing, it is OPTIONAL so feel free to skip it if you want to be more generic!
