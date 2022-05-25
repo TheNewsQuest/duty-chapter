@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://i.ibb.co/7V7ycrs/image.png" width="500" height="250" alt="Warrior Logo" />
+  <img src="https://i.ibb.co/7V7ycrs/image.png" width="500" height="280" alt="Warrior Logo" />
 </p>
 
 # Duty Chapter - The duty calls!
