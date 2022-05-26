@@ -1,10 +1,10 @@
 {
   "name": "duty-chapter",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "In Duty Chapter, the main goal is to utilize the resources from collecting activity and use those stored results for aiding the 'Fanciness'!",
+  "author": "bietdoikiem",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
@@ -24,7 +24,9 @@
     "@nestjs/common": "^8.0.0",
     "@nestjs/config": "^2.0.1",
     "@nestjs/core": "^8.0.0",
+    "@nestjs/mongoose": "^9.1.0",
     "@nestjs/platform-express": "^8.0.0",
+    "mongoose": "^6.3.4",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0"

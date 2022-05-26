@@ -36,3 +36,10 @@ lerna-debug.log*
 
 # Env files
 .env
+.env.staging
+.env.development
+.env.production
+
+# Docker mount
+/data/mongodb/data/db/
+/data/mongodb/mongod.conf
