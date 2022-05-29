@@ -1,9 +1,9 @@
 version: '3.8'
 
 services:
-  duty-db:
+  duty-mongo:
     image: mongo:5.0
-    container_name: mongodb
+    container_name: duty-mongo
     restart: always
     ports:
       - 27180:27017
@@ -17,3 +17,8 @@ services:
       - MONGO_INITDB_DATABASE=duty
       - MONGO_INITDB_USERNAME=duty-admin
       - MONGO_INITDB_PASSWORD=duty-admin
+
+networks:
+  default:
+    external:
+      name: thenewsquest-network
