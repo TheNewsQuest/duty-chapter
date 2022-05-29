@@ -11,12 +11,17 @@ services:
       - ./data/mongodb/initdb.d/:/docker-entrypoint-initdb.d/
       - ./data/mongodb/mongod.conf:/etc/mongod.conf
       - ./data/mongodb/data/db/:/data/db
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=root
-      - MONGO_INITDB_ROOT_PASSWORD=root
-      - MONGO_INITDB_DATABASE=duty
-      - MONGO_INITDB_USERNAME=duty-admin
-      - MONGO_INITDB_PASSWORD=duty-admin
+    env_file:
+      - .env
+
+  duty-chapter:
+    image: bietdoikiem/duty-chapter:1.0
+    container_name: duty-chapter
+    restart: unless-stopped
+    ports:
+      - 4000:4000
+    env_file:
+      - .env
 
 networks:
   default:

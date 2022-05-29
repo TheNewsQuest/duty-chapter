@@ -1,2 +1,7 @@
 .env
+.env.local
+.env.development
+.env.production
 test
+docker-compose.development.yaml
+docker-compose.production.yaml
