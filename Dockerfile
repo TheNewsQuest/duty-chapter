@@ -1,19 +1,28 @@
-FROM node:14
-LABEL maintainer "minhlucky2408@gmail.com"
+FROM node:14-alpine As development
 
-
-# Create app directory
-RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
-#Install app dependencies
-COPY package*.json .
-RUN npm install
+COPY package*.json ./
 
+RUN npm install --only=development
 
-# Bundle app source (including env file)
 COPY . .
-COPY .env.production .env
 
-EXPOSE 4000
-CMD [ "npm", "start" ]
+RUN npm run build
+
+FROM node:14-alpine As production
+
+ARG NODE_ENV=production
+ENV NODE_ENV=${NODE_ENV}
+
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+
+RUN npm install --only=production
+
+COPY . .
+
+COPY --from=development /usr/src/app/dist ./dist
+
+CMD ["node", "dist/main"]

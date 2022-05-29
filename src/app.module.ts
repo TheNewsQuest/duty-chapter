@@ -9,7 +9,6 @@ import { appConfig, databaseConfig } from './config';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      expandVariables: true,
       load: [appConfig, databaseConfig],
     }),
     MongooseModule.forRootAsync({
