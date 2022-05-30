@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Injectable,
   InternalServerErrorException,
   Logger,
@@ -8,16 +9,14 @@ import { Model } from 'mongoose';
 import { Article, ArticleDocument } from './schemas/article.schema';
 
 export interface FindManyArticlesByCursorResponse {
-  cursor: {
-    datetime?: Date;
-    id?: string;
-  };
+  cursor: ArticleCursor;
   data: ArticleDocument[];
 }
 
 export interface ArticleCursor {
-  datetime: Date;
-  id: string;
+  datetime?: Date;
+  id?: string;
+  isEnd?: boolean;
 }
 
 @Injectable()
@@ -30,14 +29,6 @@ export class ArticleService {
   ) {}
 
   /**
-   *
-   * @returns List of all articles
-   */
-  async findAll(): Promise<Article[]> {
-    return await this.articleModel.find().exec();
-  }
-
-  /**
    * Find Many Articles from cursor
    * @param datetime Datetime string (in ISO format)
    * @param id Object's ID
@@ -46,18 +37,25 @@ export class ArticleService {
   async findManyByCursor(
     datetime: string,
     id: string,
-    limit: number,
+    limit = 5,
   ): Promise<FindManyArticlesByCursorResponse> {
+    if (limit < 1) {
+      throw new BadRequestException('Query limit must be larger than 1.');
+    }
     let result: ArticleDocument[] = [];
+    const upperLimit = limit + 1;
+    let cursorInfo: ArticleCursor;
     try {
       if (!datetime || !id) {
         result = await this.articleModel
           .find({})
           .sort({ postedAt: -1, _id: -1 })
-          .limit(limit)
+          .limit(upperLimit)
           .exec();
+        cursorInfo = this._getCursor(result, upperLimit);
+        if (!cursorInfo.isEnd) result.pop();
         return {
-          cursor: this.getCursor(result, limit),
+          cursor: cursorInfo,
           data: result,
         };
       }
@@ -81,10 +79,12 @@ export class ArticleService {
           ],
         })
         .sort({ postedAt: -1, _id: -1 })
-        .limit(limit)
+        .limit(upperLimit)
         .exec();
+      cursorInfo = this._getCursor(result, upperLimit);
+      if (!cursorInfo.isEnd) result.pop();
       return {
-        cursor: this.getCursor(result, limit),
+        cursor: cursorInfo,
         data: result,
       };
     } catch (err) {
@@ -96,19 +96,24 @@ export class ArticleService {
   /**
    * Get cursor information from list of article results
    * @param articles List of articles
-   * @param limit Limit
+   * @param upperLimit Limit
    * @returns Cursor info
    */
-  private getCursor(articles: ArticleDocument[], limit: number): ArticleCursor {
-    if (articles.length < limit) {
+  private _getCursor(
+    articles: ArticleDocument[],
+    upperLimit: number,
+  ): ArticleCursor {
+    if (articles.length == 0 || articles.length < upperLimit) {
       return {
         datetime: null,
         id: null,
+        isEnd: true,
       };
     }
     return {
-      datetime: articles[limit - 1].postedAt,
-      id: articles[limit - 1]._id,
+      datetime: articles[upperLimit - 2].postedAt,
+      id: articles[upperLimit - 2]._id,
+      isEnd: false,
     };
   }
 }

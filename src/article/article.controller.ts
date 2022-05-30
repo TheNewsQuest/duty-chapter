@@ -13,8 +13,12 @@ export class ArticleController {
   async findManyByCursor(
     @Query('datetime') datetime?: string,
     @Query('id') id?: string,
-    @Query('limit') limit = 5,
+    @Query('limit') limit?: string,
   ) {
-    return await this.articleService.findManyByCursor(datetime, id, limit);
+    return await this.articleService.findManyByCursor(
+      datetime,
+      id,
+      parseInt(limit),
+    );
   }
 }
