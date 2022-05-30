@@ -43,3 +43,5 @@ lerna-debug.log*
 # Docker mount
 /data/mongodb/data/db/
 /data/mongodb/mongod.conf
+docker-compose.production.yaml
+docker-compose.development.yaml

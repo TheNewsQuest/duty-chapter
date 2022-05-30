@@ -1,6 +1,5 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 import { ArticleService } from './article.service';
-import { Article } from './schemas/article.schema';
 
 @Controller('articles')
 export class ArticleController {
@@ -11,7 +10,15 @@ export class ArticleController {
    * @returns List of articles
    */
   @Get()
-  async findAll(): Promise<Article[]> {
-    return await this.articleService.findAll();
+  async findManyByCursor(
+    @Query('datetime') datetime?: string,
+    @Query('id') id?: string,
+    @Query('limit') limit?: string,
+  ) {
+    return await this.articleService.findManyByCursor(
+      datetime,
+      id,
+      limit && parseInt(limit, 10),
+    );
   }
 }

@@ -16,7 +16,7 @@ export class Article {
   @Prop({ required: true })
   content: string;
 
-  @Prop({ required: true })
+  @Prop({ required: true, unique: true })
   link: string;
 
   @Prop()
@@ -32,7 +32,7 @@ export class Article {
   provider: Provider;
 
   @Prop()
-  providerThumbnailURL?: string;
+  providerAvatarURL?: string;
 
   @Prop({ required: true, type: [QuestSchema] })
   quests: Quest[];
