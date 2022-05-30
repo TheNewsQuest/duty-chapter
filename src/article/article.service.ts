@@ -42,25 +42,26 @@ export class ArticleService {
     if (limit < 1) {
       throw new BadRequestException('Query limit must be larger than 1.');
     }
-    let result: ArticleDocument[] = [];
+    let articles: ArticleDocument[] = [];
     const upperLimit = limit + 1;
-    let cursorInfo: ArticleCursor;
+    console.log('upperLimit:', upperLimit);
+    let cursorInfo: ArticleCursor = null;
     try {
       if (!datetime || !id) {
-        result = await this.articleModel
+        articles = await this.articleModel
           .find({})
           .sort({ postedAt: -1, _id: -1 })
           .limit(upperLimit)
           .exec();
-        cursorInfo = this._getCursor(result, upperLimit);
-        if (!cursorInfo.isEnd) result.pop();
+        cursorInfo = this._getCursor(articles, upperLimit);
+        if (!cursorInfo.isEnd) articles.pop(); // Pop upper
         return {
           cursor: cursorInfo,
-          data: result,
+          data: articles,
         };
       }
       const cursorDate = new Date(datetime);
-      result = await this.articleModel
+      articles = await this.articleModel
         .find({
           $and: [
             {
@@ -81,11 +82,11 @@ export class ArticleService {
         .sort({ postedAt: -1, _id: -1 })
         .limit(upperLimit)
         .exec();
-      cursorInfo = this._getCursor(result, upperLimit);
-      if (!cursorInfo.isEnd) result.pop();
+      cursorInfo = this._getCursor(articles, upperLimit);
+      if (!cursorInfo.isEnd) articles.pop(); // Pop upper
       return {
         cursor: cursorInfo,
-        data: result,
+        data: articles,
       };
     } catch (err) {
       this.logger.error(err);
@@ -110,6 +111,7 @@ export class ArticleService {
         isEnd: true,
       };
     }
+    console.log('length:', articles.length);
     return {
       datetime: articles[upperLimit - 2].postedAt,
       id: articles[upperLimit - 2]._id,

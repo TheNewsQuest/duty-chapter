@@ -18,7 +18,7 @@ export class ArticleController {
     return await this.articleService.findManyByCursor(
       datetime,
       id,
-      parseInt(limit),
+      limit && parseInt(limit, 10),
     );
   }
 }
