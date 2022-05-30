@@ -44,7 +44,6 @@ export class ArticleService {
     }
     let articles: ArticleDocument[] = [];
     const upperLimit = limit + 1;
-    console.log('upperLimit:', upperLimit);
     let cursorInfo: ArticleCursor = null;
     try {
       if (!datetime || !id) {
@@ -111,7 +110,6 @@ export class ArticleService {
         isEnd: true,
       };
     }
-    console.log('length:', articles.length);
     return {
       datetime: articles[upperLimit - 2].postedAt,
       id: articles[upperLimit - 2]._id,
