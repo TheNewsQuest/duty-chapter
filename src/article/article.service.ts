@@ -3,6 +3,7 @@ import {
   Injectable,
   InternalServerErrorException,
   Logger,
+  NotFoundException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -115,5 +116,20 @@ export class ArticleService {
       id: articles[upperLimit - 2]._id,
       isEnd: false,
     };
+  }
+
+  /**
+   * Get One Article Detail by ID
+   * @param id ID of Article
+   * @returns Article Detail
+   */
+  async getOne(id: string) {
+    const result = await this.articleModel.findOne({
+      id,
+    });
+    if (!result) {
+      throw new NotFoundException('Article is not found.');
+    }
+    return result;
   }
 }
