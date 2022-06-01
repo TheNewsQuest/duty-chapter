@@ -7,6 +7,7 @@ import { AppService } from './app.service';
 import { ArticleModule } from './article/article.module';
 import { CategoryModule } from './category/category.module';
 import { appConfig, databaseConfig } from './config';
+import { StatsModule } from './stats/stats.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { appConfig, databaseConfig } from './config';
     }),
     ArticleModule,
     CategoryModule,
+    StatsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

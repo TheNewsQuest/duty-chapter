@@ -34,9 +34,4 @@ export class ArticleController {
       data: article,
     };
   }
-
-  @Get('/keywords/:category')
-  async getCategoryKeywords(@Param('category') category: string) {
-    return await this.articleService.getCategoryKeywords(category);
-  }
 }

@@ -6,7 +6,6 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { readFileSync } from 'fs';
 import { Model } from 'mongoose';
 import { CategoryService } from '../category/category.service';
 import { Article, ArticleDocument } from './schemas/article.schema';
@@ -140,24 +139,5 @@ export class ArticleService {
       throw new NotFoundException('Article is not found.');
     }
     return result;
-  }
-
-  /**
-   * Get the most popular/dominant keywords in a specified category
-   * @param category Category
-   * @returns Dominant keywords of category
-   */
-  async getCategoryKeywords(category: string) {
-    const categories = await this.categoryService.getAllNames();
-    if (!categories.data.includes(category)) {
-      throw new BadRequestException('Specified category is not valid.');
-    }
-    const data = readFileSync(`${__dirname}/stats/${category}-keywords.json`, {
-      encoding: 'utf-8',
-    });
-    const jsonData = JSON.parse(data as string);
-    return {
-      data: jsonData,
-    };
   }
 }
