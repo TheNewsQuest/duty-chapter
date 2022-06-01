@@ -34,4 +34,9 @@ export class StatsController {
       parseInt(year),
     );
   }
+
+  @Get('/sentiment-score')
+  async getSentimentScore() {
+    return await this.statsService.getSentimentScore();
+  }
 }

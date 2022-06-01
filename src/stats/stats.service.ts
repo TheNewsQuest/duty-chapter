@@ -52,4 +52,26 @@ export class StatsService {
       data: jsonData,
     };
   }
+
+  /**
+   * Get sentiment scores of monthly articles based on categories
+   * @returns Sentiment scores
+   */
+  async getSentimentScore() {
+    let data: string;
+    try {
+      data = readFileSync(
+        `${__dirname}/analytics/numerical/sentiment-analysis.json`,
+        {
+          encoding: 'utf-8',
+        },
+      );
+    } catch (err) {
+      throw new InternalServerErrorException(err.message);
+    }
+    const jsonData = JSON.parse(data);
+    return {
+      data: jsonData,
+    };
+  }
 }
