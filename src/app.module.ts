@@ -5,6 +5,7 @@ import { LoggerModule } from 'nestjs-pino';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ArticleModule } from './article/article.module';
+import { CategoryModule } from './category/category.module';
 import { appConfig, databaseConfig } from './config';
 
 @Module({
@@ -21,6 +22,7 @@ import { appConfig, databaseConfig } from './config';
       inject: [ConfigService],
     }),
     ArticleModule,
+    CategoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],
