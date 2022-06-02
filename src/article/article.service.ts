@@ -3,9 +3,11 @@ import {
   Injectable,
   InternalServerErrorException,
   Logger,
+  NotFoundException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { CategoryService } from '../category/category.service';
 import { Article, ArticleDocument } from './schemas/article.schema';
 
 export interface FindManyArticlesByCursorResponse {
@@ -26,6 +28,7 @@ export class ArticleService {
   constructor(
     @InjectModel(Article.name)
     private readonly articleModel: Model<ArticleDocument>,
+    private readonly categoryService: CategoryService,
   ) {}
 
   /**
@@ -115,5 +118,26 @@ export class ArticleService {
       id: articles[upperLimit - 2]._id,
       isEnd: false,
     };
+  }
+
+  /**
+   * Get One Article Detail by ID
+   * @param id ID of Article
+   * @returns Article Detail
+   */
+  async getOne(id: string) {
+    if (!id.match(/^[0-9a-fA-F]{24}$/)) {
+      throw new BadRequestException('Invalid ID specified for query.');
+    }
+    let result: ArticleDocument = null;
+    try {
+      result = await this.articleModel.findById(id);
+    } catch (err) {
+      throw new InternalServerErrorException(err.message);
+    }
+    if (!result) {
+      throw new NotFoundException('Article is not found.');
+    }
+    return result;
   }
 }

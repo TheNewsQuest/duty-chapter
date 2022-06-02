@@ -1,4 +1,4 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 import { ArticleService } from './article.service';
 
 @Controller('articles')
@@ -20,5 +20,18 @@ export class ArticleController {
       id,
       limit && parseInt(limit, 10),
     );
+  }
+
+  /**
+   * Controller to get one article detail
+   * @param id ObjectID of articles
+   * @returns Article Detail
+   */
+  @Get('/:id')
+  async getOne(@Param('id') id: string) {
+    const article = await this.articleService.getOne(id);
+    return {
+      data: article,
+    };
   }
 }

@@ -1,0 +1,6 @@
+[
+  { "category": "business", "sentiment": 0.6829379069767441 },
+  { "category": "life", "sentiment": 0.7356126865671642 },
+  { "category": "news", "sentiment": 0.4802166666666667 },
+  { "category": "world", "sentiment": 0.4907988888888889 }
+]
